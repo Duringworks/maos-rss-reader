@@ -1,21 +1,14 @@
-//
-//  MaosApp.swift
-//  Maos
-//
-//  Created by Ivan on 17/07/26.
-//
-
 import SwiftUI
 import SwiftData
 
 @main
-struct MaosApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+struct MacRSSReaderApp: App {
+    // Menyimpan pilihan tema secara lokal di UserDefaults Mac
+    @AppStorage("selectedTheme") private var selectedTheme: AppTheme = .system
 
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([RSSFeed.self, RSSArticle.self]) // <- Hapus "[cite: 10]" di sini
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
@@ -25,8 +18,12 @@ struct MaosApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainSplitView()
+                .preferredColorScheme(selectedTheme.colorScheme)
         }
         .modelContainer(sharedModelContainer)
+        .commands {
+            SidebarCommands()
+        }
     }
 }
