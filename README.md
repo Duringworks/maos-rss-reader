@@ -139,7 +139,3 @@ Notes:
 
 - Some code comments were originally written in Indonesian by the developer as implementation notes (e.g. reasons for using a SwiftData background context, why `existingIDs` is cached for performance, etc.). This English README summarizes the project in English regardless.
 - The parser supports common RSS tags (`item`, `title`, `link`, `description`, `pubDate`) as well as Atom tags (`entry`, `summary`, `content`, `published`/`updated`).
-
-## 📄 License
-
-Not yet specified — add a `LICENSE` file as needed before publishing.
